@@ -1,0 +1,28 @@
+{
+  "name": "arching-kaos-api",
+  "version": "1.0.0",
+  "description": "An API for uploading radio shows to our web-based radio station.",
+  "main": "api.js",
+  "scripts": {
+    "start": "node api.js",
+    "test": "nodemon api.js"
+  },
+  "keywords": [
+    "api",
+    "arching-kaos",
+    "radio",
+    "ipfs",
+    "dat",
+    "express",
+    "http",
+    "fs"
+  ],
+  "author": "Kaotisk Hund <kaotisk@arching-kaos.tk>",
+  "license": "MIT",
+  "dependencies": {
+    "dat": "^13.13.1",
+    "express": "^4.17.1",
+    "http": "0.0.1-security",
+    "is-ipfs": "^1.0.0"
+  }
+}
