@@ -11,4 +11,4 @@ An API for listing and uploading shows.
 All routes are `GET`
 
 ## License
-MIT
+GPL v3 or later
