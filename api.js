@@ -81,7 +81,7 @@ async function add(req,res){
     		fs.mkdirSync(dir)
     	}
     	const file = fs.createWriteStream(dir+'/'+req.params.artist+' - '+req.params.title+'.ogg') // get the file...
-	const request = http.get(config.ipfsGateway.+req.params.ipfs, function(respone){
+	const request = http.get(config.ipfsGateway+req.params.ipfs, function(respone){
         	respone.pipe(file)	// and save it...
         	console.log('File downloaded')
 	})
@@ -115,6 +115,12 @@ async function add(req,res){
 
 		// Write out the file
 		fs.writeFile(config.showsList, await json, 'utf8', finished);
+
+		// Include the library for sending ssb post
+		var ssb = require('./lib/ssb-post.js')
+
+		// Send to scuttlebot the ingredients of its post
+		await ssb(rec);
 
 		// Callback for when file is finished
 		function finished(err) {
