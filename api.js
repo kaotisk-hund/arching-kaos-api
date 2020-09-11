@@ -89,7 +89,7 @@ async function add(req,res){
     		fs.mkdirSync(dir)
     	}
     	const file = fs.createWriteStream(dir+'/'+req.params.artist+' - '+req.params.title+'.ogg') // get the file...
-	const request = http.get(config.ipfsGateway+req.params.ipfs, function(respone){
+	const request = http.get(config.esotericGateway+req.params.ipfs, function(respone){
         	respone.pipe(file)	// and save it...
         	console.log('File downloaded')
 	})
