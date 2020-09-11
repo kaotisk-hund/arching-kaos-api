@@ -8,8 +8,13 @@
  *
  */
 
+//#!/usr/bin/env node
+
 // Loads express HTTP server
 var express = require('express')
+
+// And CORS for cross-origin requests
+var cors = require('cors')
 
 // Loads configuration
 var config = require('./config')
@@ -21,8 +26,10 @@ var fs = require('fs')			// FS for communicating with the local filesystem
 
 // We start our server ...
 var app = express()
-// ... and we listen at this port
+// ... and we listen at this port ...
 var server = app.listen(config.port)
+// ... and also use CORS
+app.use(cors())
 
 // We load our showsList json file ...
 var lists = fs.readFileSync(config.showsList)
@@ -31,7 +38,7 @@ var lists = fs.readFileSync(config.showsList)
 var data = JSON.parse(lists);
 
 // set a default route
-app.get('/')
+app.get('/', cors(corsOptions))
 
 // Function helping log the ip from where the request was send.
 function hi(req, res) {
@@ -39,18 +46,19 @@ function hi(req, res) {
 }
 
 // set a route with specific format for adding a show
-app.get('/show/add/:ipfs/:artist/:title', add);
+app.get('/show/add/:ipfs/:artist/:title', cors(corsOptions), add);
 
 // add a route where we show our showsList in JSON
-app.get('/shows', showsAll);
+app.get('/shows', cors(corsOptions), showsAll);
 
 // add a route where we upload things
-app.get('/upload', upload);
+app.get('/upload', cors(corsOptions), upload);
 
 
 // Show everything from the showsList
 function showsAll(req,res) {
-  res.send(data)
+  var freshData = JSON.parse(fs.readFileSync(config.showsList))
+  res.send(freshData)
 }
 
 // Check if IP is in ipList
@@ -136,6 +144,11 @@ async function add(req,res){
 
 // use this folder for static content (html files)
 app.use(express.static('public'))
+app.use(cors)
+var corsOptions = {
+  origin: 'https://radio.arching-kaos.tk',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
 
 // Funny function?
 function upload(req, res){
