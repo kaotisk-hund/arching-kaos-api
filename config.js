@@ -4,8 +4,8 @@
 
 module.exports = {
 	port: 3001,
-	ipfsGateway : 'https://ipfs.arching-kaos.tk/ipfs/',
-	downloadsFolder : '/var/lib/arching-kaos-api/downloads/',
-	ipList: '/etc/arching-kaos-api/ipList.json',
-	showsList: '/etc/arching-kaos-api/shows.json'
+	ipfsGateway : 'http://127.0.0.1:8080/ipfs/',
+	downloadsFolder : '/home/kaotisk/projects/arching-kaos-api/downloads/',
+	ipList: '/home/kaotisk/projects/arching-kaos-api/ipList.json',
+	showsList: '/home/kaotisk/projects/arching-kaos-api/all.json'
 }
