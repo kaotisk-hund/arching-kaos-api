@@ -5,21 +5,40 @@ An API for listing and uploading shows.
 
 With this API, we can upload a mix of music or a show providing an IPFS link to the API, an artist's name and a title. The API starts the process of downloading the mix/show through its IPFS gateway while a DAT archive is created for it. By the end of the download, the mix/show gets saved to a JSON list with all its information (metadata and links) and it also gets posted to Scuttlebutt protocol as a post on the channel `#arching-kaos-radio-mixes`.
 
-## Install
+## Install with docker 
+
+### Configure it
+
+Adjust sed commands for your home folder accordingly editing the `./configure.sh` file.
+`sed` needs to be run twice cause it's twice on `install.sh`.
+
+You 'll need also to escape the `/` in your path and have no trailing slash `/` in the end of it.
+
+Run `./configure.sh`
+
+### Install it
+
+Run `./install.sh` to build the docker image and start it.
+
+You have now the api running on `http://127.0.0.1` [visit](http://127.0.0.1).
+
+## Install with npm
 
 After cloning the repo cd into it and run:
 `npm i`
 or
 `npm -g i`
 
-## Set up
+### Set up
 
 Try running the following to setup directories:
 `cd tools && node installer.js`
 
-## Run it
+### Run it
 
-## Routes
+Edit `./run-api.sh` to fit it on your needs and then run it or put it on a cronjob.
+
+## API Routes
 
 * `/` - Interface for uploading a new show
 * `/shows` - Returns the current show list in JSON
