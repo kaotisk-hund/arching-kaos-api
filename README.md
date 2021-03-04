@@ -20,7 +20,7 @@ Run `./configure.sh`
 
 Run `./install.sh` to build the docker image and start it.
 
-You have now the api running on `http://127.0.0.1` [visit](http://127.0.0.1).
+You have now the api running on `http://127.0.0.1:3001` [visit](http://127.0.0.1:3001).
 
 ## Install with npm
 
