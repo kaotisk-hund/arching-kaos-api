@@ -2,7 +2,9 @@
  * Configuration
  */
 
-const home = require('os').homedir;
+// const home = require('os').homedir;
+const pwd = path.resolve(".");
+const home = path.join(pwd,"storage");
 
 module.exports = {
 	port: 3001,
