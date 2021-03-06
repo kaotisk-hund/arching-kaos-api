@@ -2,6 +2,8 @@
  * Configuration
  */
 
+var path = require("path");
+
 // const home = require('os').homedir;
 const pwd = path.resolve(".");
 const home = path.join(pwd,"storage");
