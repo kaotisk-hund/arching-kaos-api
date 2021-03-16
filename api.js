@@ -33,12 +33,14 @@ app.use(cors())
 
 // We load our showsList json file ...
 var lists = fs.readFileSync(config.showsList)
+var iplist = fs.readFileSync(config.ipList)
 
 // and parse it
 var data = JSON.parse(lists);
+var ipList = JSON.parse(iplist)
 
 // set a default route
-app.get('/', cors(corsOptions))
+app.get('/', cors(corsOptions), hi)
 
 // Function helping log the ip from where the request was send.
 function hi(req, res) {
@@ -54,6 +56,104 @@ app.get('/shows', cors(corsOptions), showsAll);
 // add a route where we upload things
 app.get('/upload', cors(corsOptions), upload);
 
+// add a route where we register a USER
+app.get('/register/:cjdns', cors(corsOptions), register);
+
+// add a route to register SERVER
+app.get('/server/register/:cjdns/:ipfs/:hostname/:ssb', cors(corsOptions), serverRegister);
+
+// test
+app.get('/*', cors(corsOptions), (req,res)=>{console.log(req.url);res.json("404")})
+
+
+function ssbCheck( ssb )
+{
+	if ( ssb ){
+		return ssb;
+	} else {
+		return 0;
+	}
+}
+
+function ipfsCheck( ipfs )
+{
+//	if( isIPFS.multihash( ipfs ) ){
+	if( ipfs ){
+		return ipfs;
+	} else {
+		return 0;
+	}
+}
+
+function cjdnsCheck( cjdns )
+{
+	if( cjdns ){
+		return cjdns;
+	} else {
+		return 0;
+	}
+}
+
+function hostnameCheck ( hostname )
+{
+	if( hostname ){
+		return hostname;
+	} else {
+		return 0;
+	}
+}
+
+// Register CJDNS SERVER
+async function serverRegister( req, res )
+{
+	var ssb = ssbCheck( req.params.ssb )
+	var ipfs = ipfsCheck( req.params.ipfs )
+	var cjdns = cjdnsCheck( req.params.cjdns )
+	var hostname = hostnameCheck( req.params.hostname )
+	console.log( "Trying register a server: " + cjdns )
+	if( !checkIP( cjdns ) ){
+				// # TODO
+				// we want to create a server exchange
+				// - [x] - We will need a new file. Let's say, `servers.json`.
+				// - [x] - We also need the IPFS check.
+				// After all that, we can do the trick:
+				// 1. Add the server
+				// 2. Peer over cjdns (if possible)
+				// 3. Peer over IPFS
+				// 4. Follow on SSB
+				// 5. Try to sync mixtapes with API of server
+		console.log( "Yes, "+ cjdns + " is already an uploader!" )
+	}
+	var record = {"cjdns":cjdns,"ipfs":ipfs,"hostname":hostname,"ssb":ssb}
+	console.log(record)
+	var NewServer = record
+	//Store it as the first array element of our new list
+	var NewServerList = [NewServer]
+	//Append the previous IPs
+	var oldServerList = JSON.parse( fs.readFileSync(config.serverList) )
+	for (var i = 0; i < oldServerList.length; i++){
+		NewServerList[i+1] = oldServerList[i]
+	}
+	var ReadyServerList = JSON.stringify( NewServerList )
+	fs.writeFile(config.serverList, ReadyServerList, 'utf8', finished);
+	function finished(){console.log(NewServerList)}
+	res.json(record)
+}
+
+
+
+// Register CJDNS for now
+async function register(req,res)
+{
+	var cjdns = req.params.cjdns
+	console.log("Trying register a user: "+cjdns)
+	if(!checkIP(cjdns)) {
+		addIP(cjdns, res)
+	} else {
+		res.send("Already registered")
+		console.log(cjdns + " is already registered")
+	}
+}
 
 // Show everything from the showsList
 function showsAll(req,res) {
@@ -62,7 +162,6 @@ function showsAll(req,res) {
 }
 
 // Check if IP is in ipList
-var ipList = JSON.parse(fs.readFileSync(config.ipList))
 function checkIP(ip){
   for (var i = 0; i<ipList.length; i++){
     console.log(ipList[i])
@@ -72,6 +171,23 @@ function checkIP(ip){
     }
   }
   return false;
+}
+
+// Add IP (IPv6 from CJDNS)
+function addIP(ip, res)
+{
+	var ipListFormat = {ip:ip}
+	//Store it as the first array element of our new list
+	var NewIpList = [ipListFormat]
+	//Append the previous IPs
+	var ipList2 = JSON.parse(fs.readFileSync(config.ipList))
+	for (var i = 0; i < ipList2.length; i++){
+		NewIpList[i+1] = ipList2[i]
+	}
+	var ReadyIpList = JSON.stringify(NewIpList);
+	fs.writeFile(config.ipList, ReadyIpList, 'utf8', finished);
+	function finished(){console.log("AddIP: Done")}
+	res.send(NewIpList)
 }
 
 // add new show

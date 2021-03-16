@@ -43,6 +43,8 @@ Edit `./run-api.sh` to fit it on your needs and then run it or put it on a cronj
 * `/` - Interface for uploading a new show
 * `/shows` - Returns the current show list in JSON
 * `/show/add/:ipfs/:artist/:title` - Adds a show with the :ipfs for the IPFS has (no /ipfs/ is needed), :artist for the name of the Artist and :title for the title of the show
+* `/register/:cjdns` - Adds a CJDNS IP to the `ipList.json` which whitelists IPs in order to be able to upload mixtapes to the API.
+* `/server/register/:cjdns/:ipfs/:hostname/:ssb` - Adds a server on `servers.json`.
 
 All routes are `GET`
 
