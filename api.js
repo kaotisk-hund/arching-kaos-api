@@ -112,16 +112,16 @@ async function serverRegister( req, res )
 	var hostname = hostnameCheck( req.params.hostname )
 	console.log( "Trying register a server: " + cjdns )
 	if( !checkIP( cjdns ) ){
-				// # TODO
-				// we want to create a server exchange
-				// - [x] - We will need a new file. Let's say, `servers.json`.
-				// - [x] - We also need the IPFS check.
-				// After all that, we can do the trick:
-				// 1. Add the server
-				// 2. Peer over cjdns (if possible)
-				// 3. Peer over IPFS
-				// 4. Follow on SSB
-				// 5. Try to sync mixtapes with API of server
+		// # TODO Add the following
+		// we want to create a server exchange
+		// - [x] - We will need a new file. Let's say, `servers.json`.
+		// - [x] - We also need the IPFS check.
+		// After all that, we can do the trick:
+		// 1. Add the server
+		// 2. Peer over cjdns (if possible)
+		// 3. Peer over IPFS
+		// 4. Follow on SSB
+		// 5. Try to sync mixtapes with API of server
 		console.log( "Yes, "+ cjdns + " is already an uploader!" )
 	}
 	var record = {"cjdns":cjdns,"ipfs":ipfs,"hostname":hostname,"ssb":ssb}
