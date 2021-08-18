@@ -5,7 +5,7 @@ An API for listing and uploading shows.
 
 With this API, we can upload a mix of music or a show providing an IPFS link to the API, an artist's name and a title. The API starts the process of downloading the mix/show through its IPFS gateway while a DAT archive is created for it. By the end of the download, the mix/show gets saved to a JSON list with all its information (metadata and links) and it also gets posted to Scuttlebutt protocol as a post on the channel `#arching-kaos-radio-mixes`.
 
-## Install with docker 
+## Install with podman 
 
 ### Configure it
 
@@ -18,7 +18,7 @@ Run `./configure.sh`
 
 ### Install it
 
-Run `./install.sh` to build the docker image and start it.
+Run `./install.sh` to build the podman image and start it.
 
 You have now the api running on `http://127.0.0.1:3001` [visit](http://127.0.0.1:3001).
 
