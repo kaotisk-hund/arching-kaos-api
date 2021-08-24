@@ -21,10 +21,10 @@
   "license": "MIT",
   "dependencies": {
     "cors": "^2.8.5",
-    "dat": "^13.13.1",
+    "dat": "^14.0.2",
     "express": "^4.17.1",
     "http": "0.0.1-security",
-    "is-ipfs": "^1.0.0",
+    "is-ipfs": "^1.0.3",
     "ssb-client": "^4.9.0"
   }
 }
