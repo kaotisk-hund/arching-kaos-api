@@ -1,2 +1,2 @@
 #!/bin/sh
-podman build -t api .
+podman build -f Dockerfile -t api .
