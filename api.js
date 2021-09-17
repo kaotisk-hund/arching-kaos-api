@@ -1,6 +1,6 @@
 /*
  * Arching Kaos API
- * Author: Kaotisk Hund <kaotisk@arching-kaos.tk>
+ * Author: Kaotisk Hund <kaotisk@arching-kaos.com>
  * Description: Provides an API and a landing page to upload a show to our radio station. Also,
  * stores and retrieves the show list for our site to be informed.
  * License: MIT

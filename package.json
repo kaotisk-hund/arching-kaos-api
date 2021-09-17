@@ -17,7 +17,7 @@
     "http",
     "fs"
   ],
-  "author": "Kaotisk Hund <kaotisk@arching-kaos.tk>",
+  "author": "Kaotisk Hund <kaotisk@arching-kaos.com>",
   "license": "MIT",
   "dependencies": {
     "cors": "^2.8.5",
