@@ -1,6 +1,6 @@
 # You should always specify a full version here to ensure all of your developers
 # are running the same version of Node.
-FROM node:latest
+FROM node:18-buster
 
 # The base node image sets a very verbose log level.
 ENV NPM_CONFIG_LOGLEVEL warn
