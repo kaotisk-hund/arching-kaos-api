@@ -1,4 +1,11 @@
-# Arching Kaos API
+# Arching Kaos API (obsolete)
+
+> Disclaimer: This is the *OLD* API used for Arching Kaos Radio project. The
+> is under restructuring currently.
+> Development is happening over:
+>  - https://github.com/arching-kaos/arching-kaos-tools
+>  - https://github.com/arching-kaos/arching-kaos-web-ui
+
 An API for listing and uploading shows.
 
 ## Description
